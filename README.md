@@ -82,7 +82,7 @@ of implementing. You should definitely check them out!
 | emoji icons              | apple, joypixels | any installed | apple |
 
 ### Downloads
-|Language|
+|Language|||
 |:----------:|:------------:|:------------------:|
 |Chinese, Traditional| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-zh-hant-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-zh-hant-joypixels.alfredworkflow)|
 |Chinese| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-zh-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-zh-joypixels.alfredworkflow)|
