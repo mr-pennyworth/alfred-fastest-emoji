@@ -1,0 +1,10 @@
+*~
+*.ttc
+*.alfredworkflow
+__pycache__
+alfreditems.*
+emoji-to-icon-filename.json
+node_modules
+package-lock.json
+icons
+wfbuild

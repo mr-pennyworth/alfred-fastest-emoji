@@ -1,0 +1,3 @@
+[submodule "emojibase"]
+	path = emojibase
+	url = https://github.com/milesj/emojibase
