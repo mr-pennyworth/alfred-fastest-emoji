@@ -217,15 +217,25 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./jq ".items[] |= if (.uid==\"$uid\") then . + {variables: {emoji: \"$emoji\"}, icon: {path: \"$iconfile\"}} else . end" alfreditems.json &gt; new.json
+				<string>import json
+import os
 
-mv new.json alfreditems.json</string>
+with open('alfreditems.json') as f:
+  alfreditems = json.load(f)
+
+for item in alfreditems['items']:
+  if item['uid'] == os.environ['uid']:
+    item['variables']['emoji'] = os.environ['emoji']
+    item['icon']['path'] = os.environ['iconfile']
+
+with open('alfreditems.json', 'w') as f:
+  json.dump(alfreditems, f)</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>3</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -330,7 +340,7 @@ mv new.json alfreditems.json</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.0.2</string>
+	<string>0.0.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>

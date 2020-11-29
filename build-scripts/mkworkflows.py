@@ -17,7 +17,6 @@ BUILD_DIR = f'{WF_DIR}/wfbuild'
 WF_FILES = [
   'icon.png',
   'info.plist',
-  'jq',
   'README.md',
 ]
 
