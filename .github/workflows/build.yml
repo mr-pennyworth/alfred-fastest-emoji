@@ -1,0 +1,42 @@
+name: Build and Release
+
+on: push
+
+jobs:
+  build-and-release:
+    name: Build and Release FAMOS
+    runs-on: macos-11.0
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Generate Mapping from Emoji to Icon Filename
+        run: python3 build-scripts/make_emoji_to_icon_filename_mapping.py
+
+      - name: Make Apple Icons
+        run: cd build-scripts && npm i fontkit && node make_apple_icons.js && cd ..
+
+      - name: Make Workflows
+        run: python3 build-scripts/mkworkflows.py
+
+      - name: Get Workflow Version
+        run: echo "WF_VERSION=$(plutil -extract version xml1 -o - info.plist | sed -n 's/.*<string>\(.*\)<\/string>.*/\1/p')" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.WF_VERSION }}
+          release_name: ${{ env.WF_VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ls *.alfredworkflow | tr \\n \\0 | xargs -0 -I{} -n1 hub release edit --attach "{}" -m "$WF_VERSION" "$WF_VERSION"

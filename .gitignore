@@ -3,6 +3,7 @@
 *.alfredworkflow
 __pycache__
 alfreditems.*
+apple_icons
 emoji-to-icon-filename.json
 node_modules
 package-lock.json

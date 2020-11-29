@@ -140,20 +140,6 @@ def make_alfred_json(datadir, outfile_path):
     json.dump(alfreditems, f, indent=2)
 
 
-def make_emoji_to_icon_filename_map(json_filepath):
-  emoji_to_icon_filename_map = {}
-  with open(json_filepath) as f:
-    raw_json = json.load(f)
-    for emoji_json in raw_json:
-      if emoji_json['hexcode'] in IGNORED: continue
-      with_skins = [emoji_json] + emoji_json.get('skins', [])
-      for skin_json in with_skins:
-        emoji = skin_json['emoji']
-        filename = icon(skin_json['hexcode'])
-        emoji_to_icon_filename_map[emoji] = filename
-  return emoji_to_icon_filename_map
-
-
 if __name__ == '__main__':
   lang = 'en'
   if len(sys.argv) > 1:
@@ -163,7 +149,3 @@ if __name__ == '__main__':
     datadir=datadir,
     outfile_path=f'{SCRIPT_DIR}/alfreditems.{lang}.json'
   )
-  raw_json_path = f'{datadir}/data.raw.json'
-  with open(f'{SCRIPT_DIR}/emoji-to-icon-filename.json', 'w') as f:
-    json.dump(make_emoji_to_icon_filename_map(raw_json_path), f, indent=2)
-
