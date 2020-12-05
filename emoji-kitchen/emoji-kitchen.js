@@ -55,7 +55,7 @@ const emojiToInfoMap =
   JSON
     .parse(fs.readFileSync(MAIN_EMOJI_JSON))
     .items
-    .makeMap((i) => i.variables.emoji);
+    .makeMap((i) => stripVarSel(i.variables.emoji));
 
 
 // All the results of querying emoji-kitchen go to
@@ -75,12 +75,12 @@ function updateFridge(alfredItems) {
   fs.writeFileSync(fridgePath, JSON.stringify(fridge));
 }
 
-function parseTenorDataAndRespondToAlfred(tenorData, res) {
+function parseTenorDataAndRespondToAlfred(tenorData, res, emoji, emoji2) {
   let downloadMonitor = new Map();
   let alfredItems = tenorData.results.map((tenorEntry) => {
     let pngPath = download(tenorEntry.url, downloadMonitor);
     let emojis = tenorEntry.tags;
-    let emojiInfos = emojis.map((e) => emojiToInfoMap[e]);
+    let emojiInfos = emojis.map((e) => emojiToInfoMap[stripVarSel(e)]);
     let keywords = emojiInfos.map(i => i.match).join(' ').split(' ');
 
     var uniqueKewords = [...new Set(keywords)].join(' ');
@@ -103,11 +103,37 @@ function parseTenorDataAndRespondToAlfred(tenorData, res) {
     };
   });
 
+  var responseItems = alfredItems;
+  if (!emoji2) {
+    let freshCookItem = {
+      'arg': 'cook_new',
+      'title': 'Cook Something New!',
+      'subtitle': `Add another emoji to ${emoji} to make a new sticker`,
+      'icon': {
+        'path': 'cook-new.png'
+      },
+      'variables': {
+        'emoji2': emoji
+      }
+    };
+    responseItems = [freshCookItem].concat(alfredItems);
+  }
+  if (alfredItems.length == 0) {
+    let sorryItem = {
+      'valid': false,
+      'title': 'Sorry, Empty Kitchen!',
+      'icon': {
+        'path': 'empty-kitchen.png'
+      }
+    };
+    responseItems = [sorryItem].concat(responseItems);
+  }
+
   // Busy-wait for downloads to finish
   var timeout = setInterval(function() {
     if (downloadMonitor.size == tenorData.results.length) {
       res.setHeader('Content-Type', 'application/json');
-      res.write(JSON.stringify({'items': alfredItems}));
+      res.write(JSON.stringify({'items': responseItems}));
       res.end();
       console.log('Responded to alfred');
       clearInterval(timeout); 
@@ -148,15 +174,28 @@ function sendErrorToAlfred(res, error) {
   res.end();
 }
 
+// strip variation selectors
+// Example: https://emojipedia.org/variation-selector-16/
+function stripVarSel(emoj) {
+  let varSel = /([\u180B-\u180D\uFE00-\uFE0F]|\uDB40[\uDD00-\uDDEF])/g;
+  return emoj.replace(varSel, '');
+}
+
 http.createServer(function (req, res) {
   let url = new URL(req.url, `http://${req.headers.host}`);
-  let query = url.searchParams.get('query');
+  var query = stripVarSel(url.searchParams.get('query'));
+  var query2 = stripVarSel(url.searchParams.get('query2'));
+  if (query2) {
+    [query, query2] = [query2, query];
+  }
 
   let emojiInfo = emojiToInfoMap[query];
-  let scriptIconPath = `${WF_DIR}/DBEA5CCE-9222-4700-9C4D-E28F2C222532.png`;
-  let emojiIconPath = `${WF_DIR}/${emojiInfo.icon.path.replace('./', '')}`;
 
+  let scriptIconPath = `${WF_DIR}/DBEA5CCE-9222-4700-9C4D-E28F2C222532.png`;
+  let script2IconPath = `${WF_DIR}/5D97EA1D-9B07-4355-9BAA-E2C508EEEB02.png`;
+  let emojiIconPath = `${WF_DIR}/${emojiInfo.icon.path.replace('./', '')}`;
   execSync(`/bin/cp "${emojiIconPath}" "${scriptIconPath}"`);
+  execSync(`/bin/cp "${emojiIconPath}" "${script2IconPath}"`);
 
   let api = new URL('https://tenor.googleapis.com/v2/featured');
   api.searchParams.append('key', 'AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ');
@@ -167,8 +206,8 @@ http.createServer(function (req, res) {
   api.searchParams.append('collection', 'emoji_kitchen_v5');
   api.searchParams.append('locale', 'en_US');
   api.searchParams.append('country', 'US');
-  api.searchParams.append('q', query);
-
+  api.searchParams.append('q', query2 ? `${query}_${query2}` : query);
+  console.log(api);
   https.get(api, REQUEST_OPTS, (tenorRes) => {
     const { statusCode } = tenorRes;
     const contentType = tenorRes.headers['content-type'];
@@ -202,7 +241,7 @@ http.createServer(function (req, res) {
     tenorRes.on('end', () => {
       try {
         const tenorData = JSON.parse(rawData);
-        parseTenorDataAndRespondToAlfred(tenorData, res);
+        parseTenorDataAndRespondToAlfred(tenorData, res, query, query2);
       } catch (e) {
         console.error(e.message);
         res.write(e.message);

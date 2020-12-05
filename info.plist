@@ -34,9 +34,9 @@
 				<key>destinationuid</key>
 				<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>Stickers Emoji Kitchen</string>
+				<string>Emoji Kitchen Stickers</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -103,6 +103,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4BF08BDF-3DFB-4E3F-899E-F1F3FABD8F52</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5D97EA1D-9B07-4355-9BAA-E2C508EEEB02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5D97EA1D-9B07-4355-9BAA-E2C508EEEB02</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EAA50B67-16BC-460B-A1F0-FAD95E839F7E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>63F20C15-0919-4723-8299-273605619390</key>
 		<array>
 			<dict>
@@ -131,11 +157,24 @@
 		</array>
 		<key>6B8FF65D-35AC-45CF-9D7B-15A84DCDBAA6</key>
 		<array/>
+		<key>968EC99D-E9A2-4967-87F3-6773664D9342</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DBEA5CCE-9222-4700-9C4D-E28F2C222532</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>16106221-E5A8-47D4-B0C8-051CE98A0F11</string>
+				<string>FEAAC3D1-3C11-4CB6-832D-5E079FAA8BFD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -149,6 +188,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>05450F7C-3D4F-45BF-ACA3-9422EF54EFDD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FEAAC3D1-3C11-4CB6-832D-5E079FAA8BFD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4BF08BDF-3DFB-4E3F-899E-F1F3FABD8F52</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0A13B1E3-39C7-46F4-BE92-FBB31C369B45</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>16106221-E5A8-47D4-B0C8-051CE98A0F11</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -369,6 +433,72 @@ with open('alfreditems.json', 'w') as f:
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>start cooking</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>EAA50B67-16BC-460B-A1F0-FAD95E839F7E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat alfreditems.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5D97EA1D-9B07-4355-9BAA-E2C508EEEB02</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -421,6 +551,121 @@ with open('alfreditems.json', 'w') as f:
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
+				<string>curl -s -G 'http://localhost:36363/' \
+  --data-urlencode "query=$emoji" &gt; "${alfred_workflow_data}/kitchen_data/tmp.json"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>start cooking</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>968EC99D-E9A2-4967-87F3-6773664D9342</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4BF08BDF-3DFB-4E3F-899E-F1F3FABD8F52</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>cook_new</string>
+						<key>outputlabel</key>
+						<string>cook_new</string>
+						<key>uid</key>
+						<string>0A13B1E3-39C7-46F4-BE92-FBB31C369B45</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>FEAAC3D1-3C11-4CB6-832D-5E079FAA8BFD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>63F20C15-0919-4723-8299-273605619390</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
 				<string>query=$1
 
 chmod +x ./impbcopy 2&gt; /dev/null &gt; /dev/null
@@ -461,61 +706,6 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<string>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>curl -s -G 'http://localhost:36363/' \
-  --data-urlencode "query=$emoji" &gt; "${alfred_workflow_data}/kitchen_data/tmp.json"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>search.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>E</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>63F20C15-0919-4723-8299-273605619390</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -583,9 +773,9 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<key>note</key>
 			<string>Copy the PNG to clipboard</string>
 			<key>xpos</key>
-			<integer>800</integer>
+			<integer>895</integer>
 			<key>ypos</key>
-			<integer>345</integer>
+			<integer>455</integer>
 		</dict>
 		<key>3F8BD888-F727-48D6-95A1-67269524AEB2</key>
 		<dict>
@@ -607,6 +797,20 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<integer>435</integer>
 			<key>ypos</key>
 			<integer>345</integer>
+		</dict>
+		<key>4BF08BDF-3DFB-4E3F-899E-F1F3FABD8F52</key>
+		<dict>
+			<key>xpos</key>
+			<integer>890</integer>
+			<key>ypos</key>
+			<integer>360</integer>
+		</dict>
+		<key>5D97EA1D-9B07-4355-9BAA-E2C508EEEB02</key>
+		<dict>
+			<key>xpos</key>
+			<integer>970</integer>
+			<key>ypos</key>
+			<integer>330</integer>
 		</dict>
 		<key>63F20C15-0919-4723-8299-273605619390</key>
 		<dict>
@@ -636,12 +840,26 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
+		<key>968EC99D-E9A2-4967-87F3-6773664D9342</key>
+		<dict>
+			<key>xpos</key>
+			<integer>185</integer>
+			<key>ypos</key>
+			<integer>345</integer>
+		</dict>
 		<key>DBEA5CCE-9222-4700-9C4D-E28F2C222532</key>
 		<dict>
 			<key>xpos</key>
 			<integer>595</integer>
 			<key>ypos</key>
 			<integer>345</integer>
+		</dict>
+		<key>EAA50B67-16BC-460B-A1F0-FAD95E839F7E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1160</integer>
+			<key>ypos</key>
+			<integer>330</integer>
 		</dict>
 		<key>F36CDFFD-4057-4FF1-965B-4379AE4B8D90</key>
 		<dict>
@@ -653,13 +871,20 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 		<key>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>985</integer>
+			<integer>1160</integer>
 			<key>ypos</key>
-			<integer>345</integer>
+			<integer>455</integer>
+		</dict>
+		<key>FEAAC3D1-3C11-4CB6-832D-5E079FAA8BFD</key>
+		<dict>
+			<key>xpos</key>
+			<integer>750</integer>
+			<key>ypos</key>
+			<integer>365</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.1.0</string>
+	<string>0.1.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>

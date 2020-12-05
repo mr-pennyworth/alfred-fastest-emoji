@@ -1,4 +1,8 @@
 # FAstest eMOji Search (FAMOS)
+An [Alfred](https://alfredapp.com) workflow for emojis that supports
+keyword-based search in [multiple languages](#famos-speaks-many-languages) and
+[creating stickers](#cook-fresh-emojis-with-emoji-kitchen) with Google's
+[Emoji Kitchen][4].
 
 ### FAMOS speaks many languages!
 ![](demo-images/multilingual.png)
@@ -18,6 +22,35 @@ The reason FAMOS exists is that I wanted my emoji picker to:
  - launch instantly
  - search with zero lag
  - let me pick skin-tones for each individual emoji
+
+
+### Cook fresh emojis with Emoji Kitchen!
+Google's [Emoji Kitchen][4] lets us combine two emojis:
+![](demo-images/emoji-kitchen-google.png)
+
+For many emojis, the Emoji Kitchen already has pre-cooked menu.
+Here's how to access that in FAMOS:
+1. Search for the emoji:
+   ![](demo-images/emoji-kitchen-1.png)
+2. Hold `option`:
+   ![](demo-images/emoji-kitchen-2.png)
+3. Pressing enter shows the pre-cooked menu:
+   ![](demo-images/emoji-kitchen-3.png)
+
+Wait, isn't the cutest panda a hugging panda?
+When you don't find the combo you want in the pre-cooked menu,
+it is time to cook something new!
+1. Select `Cook Something New!` and press enter. A list of all emojis is shown:
+   ![](demo-images/emoji-kitchen-4.png)
+2. Type and select the desired emoji and press enter:
+   ![](demo-images/emoji-kitchen-5.png)
+3. Yayy! The hugging panda is ready!
+   ![](demo-images/emoji-kitchen-6.png)
+
+You can search through all the previously-accessed pre-cooked menus
+and new stickers that you cooked yourself from the "Emoji Fridge" by
+typing `emofridge`:
+![](demo-images/emoji-fridge.png)
 
 
 ### Skin-tone prefs for each individual emoji
@@ -73,6 +106,7 @@ of implementing. You should definitely check them out!
 |            | FAMOS        | [alfred-emoji][1]  |   [EmojiTaco][2]   |
 |-----------:|:------------:|:------------------:|:------------------:|
 | non-english languages              | :white_check_mark: | :x: | :x: |
+| Google Emoji Kitchen               | :white_check_mark: | :x: | :x: |
 | copy python string                 | :x: | :x: | :white_check_mark: |
 | copy decoded python string         | :x: | :x: | :white_check_mark: |
 | copy unicode value                 | :x: | :x: | :white_check_mark: |
@@ -110,6 +144,14 @@ of implementing. You should definitely check them out!
 |Thai| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-th-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-th-joypixels.alfredworkflow)|
 |Ukrainian| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-uk-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-uk-joypixels.alfredworkflow)|
 
+
+### Icon Credits
+Icons made by editing icon created by
+[Smashicons](https://www.flaticon.com/authors/smashicons)
+from [flaticon](https://www.flaticon.com)
+
+
 [1]: https://github.com/jsumners/alfred-emoji
 [2]: https://github.com/jeeftor/EmojiTaco
 [3]: https://github.com/milesj/emojibase
+[4]: https://blog.google/products/android/emoji-kitchen-new-mashups-mixing-experience/
