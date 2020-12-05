@@ -1,0 +1,18 @@
+{
+  "name": "emoji-kitchen",
+  "version": "0.0.1",
+  "description": "Mix emojis using Google Emoji Kitchen",
+  "bin": "emoji-kitchen.js",
+  "scripts": {
+    "pkg": "pkg -d --targets node12-macos-x64 . --output emoji-kitchen",
+    "start": "node emoji-kitchen.js"
+  },
+  "author": "Mr. Pennyworth",
+  "pkg": {
+    "assets": []
+  },
+  "license": "MIT",
+  "dependencies": {
+    "lookup-dns-cache": "^2.1.0"
+  }
+}

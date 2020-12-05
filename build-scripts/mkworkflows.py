@@ -15,9 +15,12 @@ WF_DIR = os.path.abspath(f'{SCRIPT_DIR}/../')
 BUILD_DIR = f'{WF_DIR}/wfbuild'
 
 WF_FILES = [
+  'emoji-kitchen.bin',
   'icon.png',
+  'impbcopy',
   'info.plist',
   'README.md',
+  'search.sh',
 ]
 
 

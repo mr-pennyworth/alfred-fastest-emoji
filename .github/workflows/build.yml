@@ -19,6 +19,9 @@ jobs:
       - name: Make Apple Icons
         run: cd build-scripts && npm i fontkit && node make_apple_icons.js && cd ..
 
+      - name: Make Emoji Kitchen
+        run: bash build-scripts/mkkitchen.sh
+
       - name: Make Workflows
         run: python3 build-scripts/mkworkflows.py
 
