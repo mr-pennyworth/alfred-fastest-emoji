@@ -23,6 +23,7 @@ WF_FILES = [
   'info.plist',
   'README.md',
   'search.sh',
+  'set_icon.sh',
 ]
 
 

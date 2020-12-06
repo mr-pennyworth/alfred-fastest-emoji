@@ -3,7 +3,7 @@ const http = require('http');
 const https = require('https');
 const path = require('path');
 
-const { execSync } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const {lookup} = require('lookup-dns-cache');
 
 const PORT = 36363;
@@ -155,6 +155,10 @@ function download(pngUrl, downloadMonitor) {
       console.log(`Downloading ${pngUrl}`);
       response.pipe(stream);
       downloadMonitor.set(pngUrl, true);
+      // Set icon to itself so that when dragging from
+      // Alfred's results, you see the sticker and not
+      // the generic png icon.
+      spawn(`${WF_DIR}/set_icon.sh`, [pngPath, pngPath]);
     });
   } else {
     downloadMonitor.set(pngUrl, true);
@@ -194,8 +198,8 @@ http.createServer(function (req, res) {
   let scriptIconPath = `${WF_DIR}/DBEA5CCE-9222-4700-9C4D-E28F2C222532.png`;
   let script2IconPath = `${WF_DIR}/5D97EA1D-9B07-4355-9BAA-E2C508EEEB02.png`;
   let emojiIconPath = `${WF_DIR}/${emojiInfo.icon.path.replace('./', '')}`;
-  execSync(`/bin/cp "${emojiIconPath}" "${scriptIconPath}"`);
-  execSync(`/bin/cp "${emojiIconPath}" "${script2IconPath}"`);
+  spawnSync('/bin/cp', [emojiIconPath, scriptIconPath]);
+  spawnSync('/bin/cp', [emojiIconPath, script2IconPath]);
 
   let api = new URL('https://tenor.googleapis.com/v2/featured');
   api.searchParams.append('key', 'AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ');
