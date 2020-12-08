@@ -149,16 +149,19 @@ function download(pngUrl, downloadMonitor) {
   let pngPath = `${KITCHEN_DATA_DIR}/${pngName}`;
 
   if (!fs.existsSync(pngPath)) {
-    const stream = fs.createWriteStream(pngPath);
+    const fileStream = fs.createWriteStream(pngPath);
     const getter = pngUrl.startsWith('https:') ? https : http;
+    console.log(`Downloading ${pngUrl}`);
     getter.get(pngUrl, REQUEST_OPTS, (response) => {
-      console.log(`Downloading ${pngUrl}`);
-      response.pipe(stream);
-      downloadMonitor.set(pngUrl, true);
-      // Set icon to itself so that when dragging from
-      // Alfred's results, you see the sticker and not
-      // the generic png icon.
-      spawn(`${WF_DIR}/set_icon.sh`, [pngPath, pngPath]);
+      response.pipe(fileStream);
+      fileStream.on('finish', () => {
+        downloadMonitor.set(pngUrl, true);
+        // Set icon to itself so that when dragging from
+        // Alfred's results, you see the sticker and not
+        // the generic png icon.
+        spawn(`${WF_DIR}/set_icon.sh`, [pngPath, pngPath]);
+        console.log(`Finished download: ${pngPath}`);
+      });
     });
   } else {
     downloadMonitor.set(pngUrl, true);
