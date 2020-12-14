@@ -4,6 +4,12 @@ keyword-based search in [multiple languages](#famos-speaks-many-languages) and
 [creating stickers](#cook-fresh-emojis-with-emoji-kitchen) with Google's
 [Emoji Kitchen][4].
 
+### Prerequisites and Installation
+- Purchase [Alfred Power Pack](https://www.alfredapp.com/shop/).
+- Head over to [downloads](#downloads) to get FAMOS for
+  your desired language and emoji flavor.
+- Open the downloaded file by double-clicking on it.
+
 ### FAMOS speaks many languages!
 ![](demo-images/multilingual.png)
 FAMOS uses [emojibase][3], which is an excellent library, meticulously
