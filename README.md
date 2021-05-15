@@ -1,4 +1,8 @@
 # FAstest eMOji Search (FAMOS)
+<a href="https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/">
+  <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/mr-pennyworth/alfred-fastest-emoji/total">
+</a><br/><br/>
+
 An [Alfred](https://alfredapp.com) workflow for emojis that supports
 keyword-based search in [multiple languages](#famos-speaks-many-languages) and
 [creating stickers](#cook-fresh-emojis-with-emoji-kitchen) with Google's
