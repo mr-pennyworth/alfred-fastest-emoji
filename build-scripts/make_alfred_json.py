@@ -39,7 +39,7 @@ def get_uid_to_shortcodes_map(datadir):
             shortcode.replace('_', ' ').replace(':', '')
             for shortcode in shortcodes
           ])
-          
+
   return _uid_to_shortcodes_map
 
 
@@ -47,7 +47,7 @@ def get_keywords(raw_json, datadir):
   uid_to_shorcodes = get_uid_to_shortcodes_map(datadir)
   return set(
     raw_json.get('tags', []) +
-    [raw_json['annotation']] +
+    [raw_json['label']] +
     uid_to_shorcodes[raw_json['hexcode']]
   )
 
@@ -70,7 +70,7 @@ def make_tone_choice_menu(raw_json):
     skin_tone_uid = skin_tone_json['hexcode']
     items.append({
       'uid': skin_tone_uid,
-      'title': skin_tone_json['annotation'],
+      'title': skin_tone_json['label'],
       'icon': {
         'path': f'./icons/{icon(skin_tone_uid)}'
       },
@@ -87,7 +87,7 @@ def make_tone_choice_menu(raw_json):
 
 def make_alfred_item(raw_json, datadir):
   uid = raw_json['hexcode']
-  title = raw_json['annotation']
+  title = raw_json['label']
   emoji = raw_json['emoji']
 
   keywords = get_keywords(raw_json, datadir)
