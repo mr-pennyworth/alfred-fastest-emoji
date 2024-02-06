@@ -40,12 +40,35 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>176CE418-AED6-4D2F-A2D8-64A9ADB151E2</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Emoji Kitchen Stickers</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>16106221-E5A8-47D4-B0C8-051CE98A0F11</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>176CE418-AED6-4D2F-A2D8-64A9ADB151E2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -756,6 +779,14 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>176CE418-AED6-4D2F-A2D8-64A9ADB151E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -776,6 +807,13 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 			<integer>895</integer>
 			<key>ypos</key>
 			<integer>455</integer>
+		</dict>
+		<key>176CE418-AED6-4D2F-A2D8-64A9ADB151E2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>370</integer>
+			<key>ypos</key>
+			<integer>665</integer>
 		</dict>
 		<key>3F8BD888-F727-48D6-95A1-67269524AEB2</key>
 		<dict>
@@ -884,7 +922,7 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.1.3</string>
+	<string>0.1.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>
