@@ -281,7 +281,7 @@ with open('alfreditems.json', 'w') as f:
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>3</integer>
+				<integer>9</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -922,7 +922,7 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.1.4</string>
+	<string>0.1.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>
