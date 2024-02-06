@@ -39,6 +39,9 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Install hub CLI for Uploading Release Assets
+        run: brew install hub
+
       - name: Upload Release Assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
