@@ -51,6 +51,52 @@
 				<false/>
 			</dict>
 		</array>
+		<key>072D1943-C7BE-44ED-A91E-CF18CA8A7133</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>07847C4A-4873-4AB2-952D-3534BFD16D0F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>07847C4A-4873-4AB2-952D-3534BFD16D0F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4689C97C-EC58-4929-ADB8-23A2AEABAE32</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>69588403-E742-410C-BB57-7F19EC27FF65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>16106221-E5A8-47D4-B0C8-051CE98A0F11</key>
 		<array>
 			<dict>
@@ -258,41 +304,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>import json
-import os
-
-with open('alfreditems.json') as f:
-  alfreditems = json.load(f)
-
-for item in alfreditems['items']:
-  if item['uid'] == os.environ['uid']:
-    item['variables']['emoji'] = os.environ['emoji']
-    item['icon']['path'] = os.environ['iconfile']
-
-with open('alfreditems.json', 'w') as f:
-  json.dump(alfreditems, f)</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>9</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6B8FF65D-35AC-45CF-9D7B-15A84DCDBAA6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -340,6 +351,103 @@ with open('alfreditems.json', 'w') as f:
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>import json
+import os
+
+with open('alfreditems.json') as f:
+  alfreditems = json.load(f)
+
+for item in alfreditems['items']:
+  if item['uid'] == os.environ['uid']:
+    item['variables']['emoji'] = os.environ['emoji']
+    item['icon']['path'] = os.environ['iconfile']
+
+with open('alfreditems.json', 'w') as f:
+  json.dump(alfreditems, f)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6B8FF65D-35AC-45CF-9D7B-15A84DCDBAA6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>12</integer>
+				<key>filterable</key>
+				<true/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
+				<string>imgs.sh</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>showsubtitles</key>
+				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<true/>
+				<key>titlesinfooter</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>uid</key>
+			<string>07847C4A-4873-4AB2-952D-3534BFD16D0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>snippetapp</string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>072D1943-C7BE-44ED-A91E-CF18CA8A7133</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -367,6 +475,25 @@ with open('alfreditems.json', 'w') as f:
 			<string>F36CDFFD-4057-4FF1-965B-4379AE4B8D90</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{var:emoji}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>69588403-E742-410C-BB57-7F19EC27FF65</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -414,25 +541,6 @@ with open('alfreditems.json', 'w') as f:
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>05450F7C-3D4F-45BF-ACA3-9422EF54EFDD</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{var:emoji}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>69588403-E742-410C-BB57-7F19EC27FF65</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -522,6 +630,45 @@ with open('alfreditems.json', 'w') as f:
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>start cooking</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>968EC99D-E9A2-4967-87F3-6773664D9342</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>curl -s -G 'http://localhost:36363/' \
+  --data-urlencode "query=$emoji" &gt; "${alfred_workflow_data}/kitchen_data/tmp.json"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -569,43 +716,6 @@ with open('alfreditems.json', 'w') as f:
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>curl -s -G 'http://localhost:36363/' \
-  --data-urlencode "query=$emoji" &gt; "${alfred_workflow_data}/kitchen_data/tmp.json"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>search.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>triggerid</key>
-				<string>start cooking</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>968EC99D-E9A2-4967-87F3-6773664D9342</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -642,6 +752,8 @@ with open('alfreditems.json', 'w') as f:
 				</array>
 				<key>elselabel</key>
 				<string>else</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -653,33 +765,23 @@ with open('alfreditems.json', 'w') as f:
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>v</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
 				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>E</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>63F20C15-0919-4723-8299-273605619390</string>
+			<string>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -712,23 +814,33 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>v</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</string>
+			<string>63F20C15-0919-4723-8299-273605619390</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -795,134 +907,150 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 		<key>05450F7C-3D4F-45BF-ACA3-9422EF54EFDD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>185</integer>
+			<real>185</real>
 			<key>ypos</key>
-			<integer>180</integer>
+			<real>180</real>
+		</dict>
+		<key>072D1943-C7BE-44ED-A91E-CF18CA8A7133</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>07847C4A-4873-4AB2-952D-3534BFD16D0F</key>
+		<dict>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>16106221-E5A8-47D4-B0C8-051CE98A0F11</key>
 		<dict>
 			<key>note</key>
 			<string>Copy the PNG to clipboard</string>
 			<key>xpos</key>
-			<integer>895</integer>
+			<real>895</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>176CE418-AED6-4D2F-A2D8-64A9ADB151E2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>370</integer>
+			<real>370</real>
 			<key>ypos</key>
-			<integer>665</integer>
+			<real>665</real>
 		</dict>
 		<key>3F8BD888-F727-48D6-95A1-67269524AEB2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>595</integer>
+			<real>595</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>4689C97C-EC58-4929-ADB8-23A2AEABAE32</key>
 		<dict>
 			<key>xpos</key>
-			<integer>430</integer>
+			<real>430</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>46F79B68-84A7-4E44-A2EF-DFE54EC16EA4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>435</integer>
+			<real>435</real>
 			<key>ypos</key>
-			<integer>345</integer>
+			<real>345</real>
 		</dict>
 		<key>4BF08BDF-3DFB-4E3F-899E-F1F3FABD8F52</key>
 		<dict>
 			<key>xpos</key>
-			<integer>890</integer>
+			<real>890</real>
 			<key>ypos</key>
-			<integer>360</integer>
+			<real>360</real>
 		</dict>
 		<key>5D97EA1D-9B07-4355-9BAA-E2C508EEEB02</key>
 		<dict>
 			<key>xpos</key>
-			<integer>970</integer>
+			<real>970</real>
 			<key>ypos</key>
-			<integer>330</integer>
+			<real>330</real>
 		</dict>
 		<key>63F20C15-0919-4723-8299-273605619390</key>
 		<dict>
 			<key>xpos</key>
-			<integer>435</integer>
+			<real>435</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>69116487-E1CC-4FAE-BBFC-7904198F317B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>10</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>240</integer>
+			<real>240</real>
 		</dict>
 		<key>69588403-E742-410C-BB57-7F19EC27FF65</key>
 		<dict>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>180</integer>
+			<real>180</real>
 		</dict>
 		<key>6B8FF65D-35AC-45CF-9D7B-15A84DCDBAA6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>968EC99D-E9A2-4967-87F3-6773664D9342</key>
 		<dict>
 			<key>xpos</key>
-			<integer>185</integer>
+			<real>185</real>
 			<key>ypos</key>
-			<integer>345</integer>
+			<real>345</real>
 		</dict>
 		<key>DBEA5CCE-9222-4700-9C4D-E28F2C222532</key>
 		<dict>
 			<key>xpos</key>
-			<integer>595</integer>
+			<real>595</real>
 			<key>ypos</key>
-			<integer>345</integer>
+			<real>345</real>
 		</dict>
 		<key>EAA50B67-16BC-460B-A1F0-FAD95E839F7E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1160</integer>
+			<real>1160</real>
 			<key>ypos</key>
-			<integer>330</integer>
+			<real>330</real>
 		</dict>
 		<key>F36CDFFD-4057-4FF1-965B-4379AE4B8D90</key>
 		<dict>
 			<key>xpos</key>
-			<integer>10</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>130</integer>
+			<real>130</real>
 		</dict>
 		<key>FAFB4119-D376-48C5-8311-5A6A9A53BBB6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1160</integer>
+			<real>1160</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>FEAAC3D1-3C11-4CB6-832D-5E079FAA8BFD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<real>750</real>
 			<key>ypos</key>
-			<integer>365</integer>
+			<real>365</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
-	<string>0.1.7</string>
+	<string>0.1.8</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>

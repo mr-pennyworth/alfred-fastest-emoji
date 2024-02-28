@@ -19,6 +19,7 @@ WF_FILES = [
   'emoji-kitchen.bin',
   'empty-kitchen.png',
   'icon.png',
+  'imgs.sh',
   'impbcopy',
   'info.plist',
   'README.md',
