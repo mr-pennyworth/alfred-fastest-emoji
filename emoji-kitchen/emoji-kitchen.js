@@ -2,28 +2,37 @@ const fs = require('fs');
 const http = require('http');
 const https = require('https');
 const path = require('path');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 
 const { spawn, spawnSync } = require("child_process");
-const {lookup} = require('lookup-dns-cache');
+const { lookup } = require('lookup-dns-cache');
+const { log } = require('console');
 
 const PORT = 36363;
+
+let agent = undefined;
+if (process.env.FAMOS_PROXY && process.env.FAMOS_PROXY.startsWith('http')) {
+  agent = new HttpsProxyAgent(process.env.FAMOS_PROXY);
+  console.log('Using proxy agent: ', process.env.FAMOS_PROXY);
+}
 
 // https://nodejs.org/api/http.html#http_http_get_options_callback
 const REQUEST_OPTS = {
   family: 4,
   lookup: lookup,
+  agent: agent,
 };
 
-String.prototype.title = function() {
+String.prototype.title = function () {
   return this.replace(/(^|\s)\S/g, (t) => t.toUpperCase());
 };
 
 // Negative indices for arrays
-Array.prototype.get = function(i) {
+Array.prototype.get = function (i) {
   return this[(i + this.length) % this.length];
 };
 
-Array.prototype.makeMap = function(keyfunc) {
+Array.prototype.makeMap = function (keyfunc) {
   return this.reduce(
     (dict, item) => {
       dict[keyfunc(item)] = item;
@@ -62,7 +71,7 @@ const emojiToInfoMap =
 // the emoji fridge for easy later access.
 function updateFridge(alfredItems) {
   let fridgePath = `${KITCHEN_DATA_DIR}/fridge.json`;
-  var fridge = {'items': []};
+  var fridge = { 'items': [] };
   if (fs.existsSync(fridgePath)) {
     fridge = JSON.parse(fs.readFileSync(fridgePath));
   }
@@ -130,13 +139,13 @@ function parseTenorDataAndRespondToAlfred(tenorData, res, emoji, emoji2) {
   }
 
   // Busy-wait for downloads to finish
-  var timeout = setInterval(function() {
+  var timeout = setInterval(function () {
     if (downloadMonitor.size == tenorData.results.length) {
       res.setHeader('Content-Type', 'application/json');
-      res.write(JSON.stringify({'items': responseItems}));
+      res.write(JSON.stringify({ 'items': responseItems }));
       res.end();
       console.log('Responded to alfred');
-      clearInterval(timeout); 
+      clearInterval(timeout);
     }
   }, 50);
 
@@ -229,7 +238,7 @@ http.createServer(function (req, res) {
     } else if (!/^application\/json/.test(contentType)) {
       error = new Error(
         'Invalid content-type.\n' +
-          `Expected application/json but received ${contentType}`
+        `Expected application/json but received ${contentType}`
       );
     }
 

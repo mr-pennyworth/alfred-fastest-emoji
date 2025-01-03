@@ -7,6 +7,8 @@ apple_icons
 emoji-to-icon-filename.json
 node_modules
 package-lock.json
+pnpm-lock.yaml
+build-scripts/package.json
 icons
 wfbuild
 emoji-kitchen.bin

@@ -6,4 +6,4 @@ cd emoji-kitchen
 npm install
 cd ..
 
-pkg --targets node12-macos-x64 ./emoji-kitchen --output emoji-kitchen.bin
+pkg --targets node14-macos-x64 ./emoji-kitchen --output emoji-kitchen.bin
