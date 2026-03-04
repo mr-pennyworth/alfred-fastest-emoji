@@ -5,13 +5,12 @@ on: push
 jobs:
   build-and-release:
     name: Build and Release FAMOS
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          submodules: 'recursive'
+          submodules: "recursive"
 
       - name: Generate Mapping from Emoji to Icon Filename
         run: python3 build-scripts/make_emoji_to_icon_filename_mapping.py
