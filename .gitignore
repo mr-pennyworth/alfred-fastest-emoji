@@ -2,6 +2,7 @@
 *.ttc
 *.alfredworkflow
 __pycache__
+.DS_Store
 alfreditems.*
 apple_icons
 emoji-to-icon-filename.json
