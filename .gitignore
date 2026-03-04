@@ -3,6 +3,8 @@
 *.alfredworkflow
 __pycache__
 .DS_Store
+.cursorindexingignore
+.specstory
 alfreditems.*
 apple_icons
 emoji-to-icon-filename.json
