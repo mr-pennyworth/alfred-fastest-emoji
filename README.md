@@ -158,6 +158,7 @@ of implementing. You should definitely check them out!
 |Swedish| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-sv-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-sv-joypixels.alfredworkflow)|
 |Thai| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-th-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-th-joypixels.alfredworkflow)|
 |Ukrainian| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-uk-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-uk-joypixels.alfredworkflow)|
+|Vietnamese| [apple](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-vi-apple.alfredworkflow) | [joypixels](https://github.com/mr-pennyworth/alfred-fastest-emoji/releases/latest/download/Fastest.Emoji.Search-vi-joypixels.alfredworkflow)|
 
 
 ### Icon Credits
