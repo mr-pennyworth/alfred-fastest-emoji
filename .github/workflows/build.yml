@@ -3,9 +3,63 @@ name: Build and Release
 on: push
 
 jobs:
+  check-release:
+    name: Check Release Requirement
+    runs-on: macos-latest
+    outputs:
+      wf_version: ${{ steps.wf.outputs.wf_version }}
+      needs_release: ${{ steps.check.outputs.needs_release }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: Get Workflow Version
+        id: wf
+        run: |
+          WF_VERSION="$(plutil -extract version xml1 -o - info.plist | \
+            sed -n 's/.*<string>\(.*\)<\/string>.*/\1/p')"
+          echo "wf_version=${WF_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Check if release already exists
+        id: check
+        uses: actions/github-script@v7
+        env:
+          WF_VERSION: ${{ steps.wf.outputs.wf_version }}
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const current = process.env.WF_VERSION;
+
+            let latestTag = null;
+            try {
+              const latest = await github.rest.repos.getLatestRelease({
+                owner,
+                repo,
+              });
+              latestTag = latest.data.tag_name;
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+            }
+
+            const needsRelease = latestTag !== current;
+            core.info(`WF_VERSION=${current}, latest=${latestTag}`);
+            core.setOutput(
+              "needs_release",
+              needsRelease ? "true" : "false"
+            );
+
   build-and-release:
     name: Build and Release FAMOS
+    needs: check-release
+    if: needs.check-release.outputs.needs_release == 'true'
     runs-on: macos-latest
+    env:
+      WF_VERSION: ${{ needs.check-release.outputs.wf_version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,9 +82,6 @@ jobs:
 
       - name: Make Workflows
         run: python3 build-scripts/mkworkflows.py
-
-      - name: Get Workflow Version
-        run: echo "WF_VERSION=$(plutil -extract version xml1 -o - info.plist | sed -n 's/.*<string>\(.*\)<\/string>.*/\1/p')" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
