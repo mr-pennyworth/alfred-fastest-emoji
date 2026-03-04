@@ -21,6 +21,11 @@ jobs:
       - name: Make Emoji Kitchen
         run: bash build-scripts/mkkitchen.sh
 
+      - name: Verify Emoji Kitchen Binary
+        run: |
+          file emoji-kitchen.bin
+          lipo -archs emoji-kitchen.bin
+
       - name: Make Workflows
         run: python3 build-scripts/mkworkflows.py
 

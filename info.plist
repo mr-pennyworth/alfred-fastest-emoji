@@ -649,9 +649,6 @@ with open('alfreditems.json', 'w') as f:
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
-				<key>script</key>
-				<string>curl -s -G 'http://localhost:36363/' \
-  --data-urlencode "query=$emoji" &gt; "${alfred_workflow_data}/kitchen_data/tmp.json"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
