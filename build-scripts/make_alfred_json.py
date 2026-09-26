@@ -6,6 +6,7 @@ import os
 import sys
 
 from collections import defaultdict
+from functools import lru_cache
 
 
 SCRIPT_DIR = sys.path[0]
@@ -23,33 +24,51 @@ IGNORED = {
 }
 
 
-_uid_to_shortcodes_map = None
-def get_uid_to_shortcodes_map(datadir):
-  global _uid_to_shortcodes_map
-  if _uid_to_shortcodes_map is None:
-    _uid_to_shortcodes_map = defaultdict(list)
-    shortcode_filenames = glob.glob(f'{datadir}/shortcodes/*.json')
-    for shortcode_filename in shortcode_filenames:
-      with open(shortcode_filename) as f:
-        for uid, shortcodes in json.load(f).items():
-          # either string or list, just make list anyway
-          if type(shortcodes) == str:
-            shortcodes = [shortcodes]
-          _uid_to_shortcodes_map[uid].extend([
-            shortcode.replace('_', ' ').replace(':', '')
-            for shortcode in shortcodes
-          ])
+@lru_cache(maxsize=1)
+def get_emojilib_keywords():
+  with open(f'{WF_DIR}/emojilib/dist/emoji-en-US.json') as f:
+    keywords = json.load(f)
+  # Emojibase and Emojilib differ in their use of presentation selectors.
+  return {
+    emoji.replace('\ufe0e', '').replace('\ufe0f', ''): [
+      keyword.replace('_', ' ') for keyword in terms
+    ]
+    for emoji, terms in keywords.items()
+  }
 
-  return _uid_to_shortcodes_map
+
+@lru_cache(maxsize=None)
+def get_uid_to_shortcodes_map(datadir):
+  uid_to_shortcodes = defaultdict(list)
+  shortcode_filenames = glob.glob(f'{datadir}/shortcodes/*.json')
+  for shortcode_filename in shortcode_filenames:
+    with open(shortcode_filename) as f:
+      for uid, shortcodes in json.load(f).items():
+        # either string or list, just make list anyway
+        if type(shortcodes) == str:
+          shortcodes = [shortcodes]
+        uid_to_shortcodes[uid].extend([
+          shortcode.replace('_', ' ').replace(':', '')
+          for shortcode in shortcodes
+        ])
+
+  return uid_to_shortcodes
 
 
 def get_keywords(raw_json, datadir):
-  uid_to_shorcodes = get_uid_to_shortcodes_map(datadir)
-  return set(
+  uid_to_shortcodes = get_uid_to_shortcodes_map(datadir)
+  keywords = set(
     raw_json.get('tags', []) +
     [raw_json['label']] +
-    uid_to_shorcodes[raw_json['hexcode']]
+    uid_to_shortcodes[raw_json['hexcode']]
   )
+
+  locale = os.path.basename(os.path.normpath(datadir))
+  if locale == 'en' or locale.startswith('en-'):
+    emoji = raw_json['emoji'].replace('\ufe0e', '').replace('\ufe0f', '')
+    keywords.update(get_emojilib_keywords().get(emoji, []))
+
+  return keywords
 
 
 def icon(uid):

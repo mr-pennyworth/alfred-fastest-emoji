@@ -4,3 +4,6 @@
 [submodule "joypixels"]
 	path = joypixels
 	url = https://github.com/joypixels/emoji-assets.git
+[submodule "emojilib"]
+	path = emojilib
+	url = https://github.com/muan/emojilib.git
