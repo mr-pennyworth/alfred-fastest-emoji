@@ -2,6 +2,9 @@ name: Build and Release
 
 on: push
 
+permissions:
+  contents: read
+
 jobs:
   check-release:
     name: Check Release Requirement
@@ -11,93 +14,79 @@ jobs:
       needs_release: ${{ steps.check.outputs.needs_release }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
+        uses: actions/checkout@v4
 
       - name: Get Workflow Version
         id: wf
         run: |
-          WF_VERSION="$(plutil -extract version xml1 -o - info.plist | \
-            sed -n 's/.*<string>\(.*\)<\/string>.*/\1/p')"
+          WF_VERSION="$(plutil -extract version raw -o - info.plist)"
           echo "wf_version=${WF_VERSION}" >> "$GITHUB_OUTPUT"
 
-      - name: Check if release already exists
+      - name: Check if this version already has a release
         id: check
         uses: actions/github-script@v7
         env:
           WF_VERSION: ${{ steps.wf.outputs.wf_version }}
         with:
           script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const current = process.env.WF_VERSION;
-
-            let latestTag = null;
             try {
-              const latest = await github.rest.repos.getLatestRelease({
-                owner,
-                repo,
+              await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: process.env.WF_VERSION,
               });
-              latestTag = latest.data.tag_name;
+              core.setOutput('needs_release', 'false');
             } catch (error) {
-              if (error.status !== 404) {
-                throw error;
-              }
+              if (error.status !== 404) throw error;
+              core.setOutput('needs_release', 'true');
             }
-
-            const needsRelease = latestTag !== current;
-            core.info(`WF_VERSION=${current}, latest=${latestTag}`);
-            core.setOutput(
-              "needs_release",
-              needsRelease ? "true" : "false"
-            );
 
   build-and-release:
     name: Build and Release FAMOS
     needs: check-release
-    if: needs.check-release.outputs.needs_release == 'true'
+    if: github.ref == 'refs/heads/main' && needs.check-release.outputs.needs_release == 'true'
     runs-on: macos-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: famos-release
+      cancel-in-progress: false
     env:
       WF_VERSION: ${{ needs.check-release.outputs.wf_version }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          submodules: "recursive"
+          submodules: recursive
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: build-scripts/package-lock.json
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Install Build Dependencies
+        run: npm ci --prefix build-scripts --ignore-scripts
 
       - name: Generate Mapping from Emoji to Icon Filename
         run: python3 build-scripts/make_emoji_to_icon_filename_mapping.py
 
       - name: Make Apple Icons
-        run: cd build-scripts && npm i fontkit && node make_apple_icons.js && cd ..
-
-      - name: Make Emoji Kitchen
-        run: bash build-scripts/mkkitchen.sh
-
-      - name: Verify Emoji Kitchen Binary
-        run: |
-          file emoji-kitchen.bin
-          lipo -archs emoji-kitchen.bin
+        run: node build-scripts/make_apple_icons.js
 
       - name: Make Workflows
         run: python3 build-scripts/mkworkflows.py
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Create Release and Upload Workflows
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.WF_VERSION }}
-          release_name: ${{ env.WF_VERSION }}
-          draft: false
-          prerelease: false
-
-      - name: Install hub CLI for Uploading Release Assets
-        run: brew install hub
-
-      - name: Upload Release Assets
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ls *.alfredworkflow | tr \\n \\0 | xargs -0 -I{} -n1 hub release edit --attach "{}" -m "$WF_VERSION" "$WF_VERSION"
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$WF_VERSION" wfbuild/*.alfredworkflow \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "$WF_VERSION" --generate-notes

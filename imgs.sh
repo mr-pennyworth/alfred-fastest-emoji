@@ -1,3 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-cat alfreditems.json
+cd "$(dirname "$0")" || exit 1
+exec /bin/cat alfreditems.json

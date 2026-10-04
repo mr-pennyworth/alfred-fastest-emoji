@@ -9,11 +9,11 @@ alfreditems.*
 apple_icons
 emoji-to-icon-filename.json
 node_modules
-package-lock.json
+/package-lock.json
 pnpm-lock.yaml
-build-scripts/package.json
 icons
 wfbuild
+# Old build output. This file is not a runtime dependency.
 emoji-kitchen.bin
 DBEA5CCE-9222-4700-9C4D-E28F2C222532.png
 5D97EA1D-9B07-4355-9BAA-E2C508EEEB02.png

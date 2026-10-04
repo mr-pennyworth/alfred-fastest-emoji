@@ -1,6 +1,6 @@
 'use strict';
 
-// https://stackoverflow.com/a/43808972/7979
+// Build-only tool. Fontkit extracts PNGs; Swift/AppKit renders other sequences.
 
 const { spawnSync } = require('child_process');
 const fontkit = require('fontkit');
@@ -18,7 +18,7 @@ const PNG_SIGNATURE = Buffer.from([
 const fontPath = '/System/Library/Fonts/Apple Color Emoji.ttc';
 const font = fontkit.openSync(fontPath).fonts[0];
 const emojiToIcon = JSON.parse(
-  fs.readFileSync(`${SCRIPT_DIR}/emoji-to-icon-filename.json`)
+  fs.readFileSync(`${SCRIPT_DIR}/emoji-to-icon-filename.json`, 'utf8')
 );
 
 function isPng(data) {

@@ -327,11 +327,11 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>echo "$tone_choice_menu"</string>
+				<string>printf '%s\n' "$tone_choice_menu"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>choose-tone.py</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -356,25 +356,48 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>import json
-import os
+				<string>ObjC.import('Foundation');
 
-with open('alfreditems.json') as f:
-  alfreditems = json.load(f)
+function run() {
+  var environment = $.NSProcessInfo.processInfo.environment;
+  function environmentVariable(name) {
+    var value = ObjC.unwrap(environment.objectForKey(name));
+    if (typeof value !== 'string') {
+      throw new Error('Missing environment variable: ' + name);
+    }
+    return value;
+  }
 
-for item in alfreditems['items']:
-  if item['uid'] == os.environ['uid']:
-    item['variables']['emoji'] = os.environ['emoji']
-    item['icon']['path'] = os.environ['iconfile']
+  var uid = environmentVariable('uid');
+  var emoji = environmentVariable('emoji');
+  var iconfile = environmentVariable('iconfile');
+  var contents = ObjC.unwrap($.NSString.stringWithContentsOfFileEncodingError(
+    'alfreditems.json', $.NSUTF8StringEncoding, null
+  ));
+  if (typeof contents !== 'string') {
+    throw new Error('Cannot read alfreditems.json');
+  }
 
-with open('alfreditems.json', 'w') as f:
-  json.dump(alfreditems, f)</string>
+  var alfreditems = JSON.parse(contents);
+  alfreditems.items.forEach(function(item) {
+    if (item.uid === uid) {
+      item.variables.emoji = emoji;
+      item.icon.path = iconfile;
+    }
+  });
+
+  if (!$(JSON.stringify(alfreditems)).writeToFileAtomicallyEncodingError(
+    'alfreditems.json', true, $.NSUTF8StringEncoding, null
+  )) {
+    throw new Error('Cannot write alfreditems.json');
+  }
+}</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>9</integer>
+				<integer>7</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -390,6 +413,8 @@ with open('alfreditems.json', 'w') as f:
 				<integer>12</integer>
 				<key>filterable</key>
 				<true/>
+				<key>fixedorder</key>
+				<false/>
 				<key>imageaspect</key>
 				<integer>0</integer>
 				<key>inputfile</key>
@@ -649,6 +674,8 @@ with open('alfreditems.json', 'w') as f:
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>script</key>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -788,12 +815,7 @@ with open('alfreditems.json', 'w') as f:
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>query=$1
-
-chmod +x ./impbcopy 2&gt; /dev/null &gt; /dev/null
-xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
-
-./impbcopy "$query"</string>
+				<string>/usr/bin/osascript -l JavaScript ./emoji-kitchen.js --copy-image "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -867,7 +889,12 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>cat "${alfred_workflow_data}/kitchen_data/fridge.json"</string>
+				<string>fridge="${alfred_workflow_data}/kitchen_data/fridge.json"
+if [ -f "$fridge" ]; then
+  /bin/cat "$fridge"
+else
+  printf '%s\n' '{"items":[]}'
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1047,7 +1074,7 @@ xattr -d com.apple.quarantine ./impbcopy  2&gt; /dev/null &gt; /dev/null
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>0.1.12</string>
+	<string>0.1.13</string>
 	<key>webaddress</key>
 	<string>https://github.com/mr-pennyworth/alfred-fastest-emoji</string>
 </dict>

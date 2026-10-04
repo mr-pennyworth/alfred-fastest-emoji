@@ -1,0 +1,12 @@
+{
+  "name": "famos-build-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build-only dependencies for Alfred Fastest Emoji",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "fontkit": "2.0.4"
+  }
+}

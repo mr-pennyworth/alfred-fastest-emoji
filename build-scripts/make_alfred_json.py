@@ -4,19 +4,20 @@ import glob
 import json
 import os
 import sys
+from pathlib import Path
 
 from collections import defaultdict
 from functools import lru_cache
 
 
-SCRIPT_DIR = sys.path[0]
-WF_DIR = os.path.abspath(f'{SCRIPT_DIR}/../')
+SCRIPT_DIR = str(Path(__file__).resolve().parent)
+WF_DIR = str(Path(SCRIPT_DIR).parent)
 
 IGNORED = {
   # These "regional indicator"s aren't really emojis.
   # They're not even listed in full-emoji-list.html.
   # No idea what they are doing in data.raw.json
-  # Just imgore them.
+  # Ignore these code points.
   '1F1E6', '1F1E7', '1F1E8', '1F1E9', '1F1EA', '1F1EB', '1F1EC',
   '1F1ED', '1F1EE', '1F1EF', '1F1F0', '1F1F1', '1F1F2', '1F1F3',
   '1F1F4', '1F1F5', '1F1F6', '1F1F7', '1F1F8', '1F1F9', '1F1FA',
@@ -26,7 +27,7 @@ IGNORED = {
 
 @lru_cache(maxsize=1)
 def get_emojilib_keywords():
-  with open(f'{WF_DIR}/emojilib/dist/emoji-en-US.json') as f:
+  with open(f'{WF_DIR}/emojilib/dist/emoji-en-US.json', encoding='utf-8') as f:
     keywords = json.load(f)
   # Emojibase and Emojilib differ in their use of presentation selectors.
   return {
@@ -42,7 +43,7 @@ def get_uid_to_shortcodes_map(datadir):
   uid_to_shortcodes = defaultdict(list)
   shortcode_filenames = glob.glob(f'{datadir}/shortcodes/*.json')
   for shortcode_filename in shortcode_filenames:
-    with open(shortcode_filename) as f:
+    with open(shortcode_filename, encoding='utf-8') as f:
       for uid, shortcodes in json.load(f).items():
         # either string or list, just make list anyway
         if type(shortcodes) == str:
@@ -112,12 +113,12 @@ def make_alfred_item(raw_json, datadir):
   keywords = get_keywords(raw_json, datadir)
   non_title_keywords = keywords - {title}
 
-  subtitle = f'keywords: {", ".join(non_title_keywords)}'
+  subtitle = f'keywords: {", ".join(sorted(non_title_keywords))}'
   item = {
     'uid': uid,
     'title': title,
     'subtitle': subtitle,
-    'match': ' '.join(keywords),
+    'match': ' '.join(sorted(keywords)),
     'icon': {
       'path': f'./icons/{icon(uid)}'
     },
@@ -147,7 +148,7 @@ def make_alfred_item(raw_json, datadir):
 
 def make_alfred_json(datadir, outfile_path):
   raw_json_path = f'{datadir}/data.raw.json'
-  with open(raw_json_path, 'r') as f:
+  with open(raw_json_path, 'r', encoding='utf-8') as f:
     raw_json = json.load(f)
 
   alfreditems = {'items': []}
@@ -155,7 +156,7 @@ def make_alfred_json(datadir, outfile_path):
     if raw_emoji['hexcode'] in IGNORED: continue
     alfreditems['items'].append(make_alfred_item(raw_emoji, datadir))
 
-  with open(outfile_path, 'w') as f:
+  with open(outfile_path, 'w', encoding='utf-8') as f:
     json.dump(alfreditems, f, indent=2)
 
 

@@ -57,7 +57,7 @@ func pngData(for emoji: String, pixelSize: Int, font: NSFont) throws -> Data {
 }
 
 guard CommandLine.arguments.count == 3,
-      let pixelSize = Int(CommandLine.arguments[1]) else {
+      let pixelSize = Int(CommandLine.arguments[1]), pixelSize > 0 else {
   fputs("usage: render_apple_emoji_icons.swift <pixel-size> <output-dir>\n", stderr)
   exit(1)
 }
@@ -70,6 +70,10 @@ let outputDirectory = URL(
 do {
   let input = FileHandle.standardInput.readDataToEndOfFile()
   let jobs = try JSONDecoder().decode([RenderJob].self, from: input)
+  try FileManager.default.createDirectory(
+    at: outputDirectory,
+    withIntermediateDirectories: true
+  )
   guard let font = NSFont(name: "AppleColorEmoji", size: CGFloat(pixelSize)) else {
     throw RenderError(description: "Apple Color Emoji font is unavailable")
   }

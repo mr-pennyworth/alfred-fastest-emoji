@@ -23,8 +23,7 @@ keyword-based search in [multiple languages](#famos-speaks-many-languages) and
 ![](demo-images/multilingual.png)
 FAMOS uses [emojibase][3], which is an excellent library, meticulously
 curated. So, all the languages that [emojibase][3] supports, FAMOS automatically
-does too. English workflows also use [Emojilib](https://github.com/muan/emojilib)
-for additional search keywords. Both libraries are Git submodules.
+does too. English workflows also use [Emojilib][5] for additional search keywords.
 
 
 ### FAMOS is the fastest!
@@ -174,3 +173,4 @@ from [flaticon](https://www.flaticon.com)
 [2]: https://github.com/jeeftor/EmojiTaco
 [3]: https://github.com/milesj/emojibase
 [4]: https://blog.google/products/android/emoji-kitchen-new-mashups-mixing-experience/
+[5]: https://github.com/muan/emojilib
